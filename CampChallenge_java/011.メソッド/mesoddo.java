@@ -29,11 +29,11 @@ public class mesoddo extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     public static void a (PrintWriter pw){
-             for (int i = 0 ;i <10; i++){
+             
         
         pw.print("私の名前は栗山です<br>");
              pw.print("1991/05/30<br>");
-             pw.print("私は和歌山県出身です。<br>");}
+             pw.print("私は和歌山県出身です。<br>");
                      
                      
                   
@@ -43,8 +43,8 @@ public class mesoddo extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            a(out);
+            for (int i = 0 ; i<10; i++){
+            a(out);}
             
             //out.print("");
          
