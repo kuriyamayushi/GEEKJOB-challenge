@@ -2,16 +2,20 @@ package jums;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+ import jums.UserDataDTO;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author hayashi-s
  */
 public class ResultDetail extends HttpServlet {
+    //UserDataBeans udb = (UserDataBeans)request.getAttribute("resultData");
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,13 +30,18 @@ public class ResultDetail extends HttpServlet {
             throws ServletException, IOException {
         try{
             request.setCharacterEncoding("UTF-8");//リクエストパラメータの文字コードをUTF-8に変更
-
+           String a = request.getParameter("id");
             //DTOオブジェクトにマッピング。DB専用のパラメータに変換
+           HttpSession session = request.getSession();
+            //ArrayList<UserDataDTO> searchData =(ArrayList<UserDataDTO>) session.getAttribute("resultData");
             UserDataDTO searchData = new UserDataDTO();
-            searchData.setUserID(2);
+            
+            int i = Integer.parseInt(a);
+            searchData.setUserID(i);
 
             UserDataDTO resultData = UserDataDAO .getInstance().searchByID(searchData);
-            request.setAttribute("resultData", resultData);
+            session.setAttribute("resultData", resultData);
+            
             
             request.getRequestDispatcher("/resultdetail.jsp").forward(request, response);  
         }catch(Exception e){

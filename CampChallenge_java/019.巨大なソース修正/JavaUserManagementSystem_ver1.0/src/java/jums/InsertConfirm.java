@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.RequestDispatcher;
+import jums.UserDataBeans;
 
 /**
  * insertconfirm.jspと対応するサーブレット
@@ -40,8 +42,19 @@ public class InsertConfirm extends HttpServlet {
             String month = request.getParameter("month");
             String day = request.getParameter("day");
             String type = request.getParameter("type");
-            String tell = request.getParameter("tell");
             String comment = request.getParameter("comment");
+            String tell = request.getParameter("tell");
+          
+            UserDataBeans userdatabeans = new UserDataBeans();
+        userdatabeans.setName(name);
+        userdatabeans.setYear(year);
+        userdatabeans.setMonth(month);
+        userdatabeans.setDay(day);
+        userdatabeans.setType(type);
+        userdatabeans.setComment(comment);
+        userdatabeans.setTell(tell);
+        
+      session.setAttribute("UDB",userdatabeans);
 
             //セッションに格納
             session.setAttribute("name", name);
@@ -52,6 +65,7 @@ public class InsertConfirm extends HttpServlet {
             session.setAttribute("tell", tell);
             session.setAttribute("comment", comment);
             System.out.println("Session updated!!");
+            
             
             request.getRequestDispatcher("/insertconfirm.jsp").forward(request, response);
         }catch(Exception e){

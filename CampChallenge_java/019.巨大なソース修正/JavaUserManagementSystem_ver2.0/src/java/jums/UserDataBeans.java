@@ -1,6 +1,7 @@
 package jums;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -26,7 +27,22 @@ public class UserDataBeans implements Serializable{
         this.tell = "";
         this.type = 0;
         this.comment= "";
+        
+        
     }
+      public UserDataBeans(UserDataDTO DTO){
+      Calendar c = Calendar.getInstance();
+c.setTime(DTO.getBirthday());
+          this.name = DTO.getName();
+        this.year=c.get(Calendar.YEAR);
+        this.month=c.get(Calendar.MONTH);
+        this.day=c.get(Calendar.DAY_OF_MONTH);;
+        
+        
+        this.tell = DTO.getTell();
+        this.type = DTO.getType();
+        this.comment= DTO.getComment();
+      }
     
     public String getName() {
         return name;
@@ -151,6 +167,21 @@ public class UserDataBeans implements Serializable{
         udd.setTell(this.tell);
         udd.setType(this.type);
         udd.setComment(this.comment);
+           
     }
+/* public void UD2UDBMapping(UserDataBeans udb){
+//     LocalDate Date = new LocalDate();
+     udb.getBirthday();
+     udb.setName(this.name);
+     udb.setTell(this.tell);
+     udb.setbirthday(this.year);
+     udb.setbirthday();
+     udb.setirthday(birthday.getday());
+     
+        udb.setType(this.type);
+        udb.setComment(this.comment);
+ }*/
+
+
     
 }

@@ -2,6 +2,7 @@ package jums;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * ユーザー情報を持ちまわるJavaBeans

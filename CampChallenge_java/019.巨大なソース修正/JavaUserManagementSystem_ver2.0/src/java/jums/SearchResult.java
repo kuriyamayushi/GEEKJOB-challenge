@@ -3,10 +3,12 @@ package jums;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,13 +35,14 @@ public class SearchResult extends HttpServlet {
             udb.setName(request.getParameter("name"));
             udb.setYear(request.getParameter("year"));
             udb.setType(request.getParameter("type"));
+            
 
             //DTOオブジェクトにマッピング。DB専用のパラメータに変換
             UserDataDTO searchData = new UserDataDTO();
             udb.UD2DTOMapping(searchData);
-
-            UserDataDTO resultData = UserDataDAO .getInstance().search(searchData);
-            request.setAttribute("resultData", resultData);
+            ArrayList<UserDataDTO> resultData = UserDataDAO .getInstance().search(searchData);
+            HttpSession session = request.getSession();
+            session.setAttribute("RESULTDATA", resultData);
             
             request.getRequestDispatcher("/searchresult.jsp").forward(request, response);  
         }catch(Exception e){
